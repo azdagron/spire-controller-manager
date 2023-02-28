@@ -63,6 +63,8 @@ for img in "${OCI_IMAGES[@]}"; do
     regctl image export "$oci_dir@${dig}" "${platform_tar}"
     
     docker load < "${platform_tar}"
+    echo docker image tag "localhost/oci/${img}:latest" "${image_to_load}"
     docker image tag "localhost/oci/${img}:latest" "${image_to_load}"
+    echo docker image rm "localhost/oci/${img}:latest"
     docker image rm "localhost/oci/${img}:latest"
 done
